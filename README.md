@@ -1,57 +1,59 @@
-# test
+# 
   
-    [object Promise]
+  ![Github license](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+  ## Description
+
   
-    ## Description
 
-    test
+  ## Table of Content
+
+  *[Installation](#installation)
+
+  *[Usage](#usage)
+
+  *[Credits](#credits)
+
+  *[License](#license)
+
+  *[Tests](#tests)
+
+  *[Contributing](#contributing)
+
+  ## Installation
+
+  To install the necessary dependencies, run the following command:
   
-    ## Table of Content
   
-    *[Installation](#installation)
+  npm i
 
-    *[Usage](#usage)
 
-    *[Credits](#credits)
-
-    *[License](#license)
-
-    *[Tests](#tests)
-
-    *[Contributing](#contributing)
+  ## Usage
   
-    ## Installation
-
-    To install the necessary dependencies, run the following command:
-   
-    ==================
-    npm i
-    ==================
-
-    ## Usage
-    
-    test
   
-    ## Collaborators or Third-Party Assets
-    
-    undefined
+
+  ## Collaborators or Third-Party Assets
   
-    ## License
-    
-    MIT
+  undefined
+
+  ## License
   
-    ## Tests
+  MIT
 
-    To run tests, run the following command:
-    
-    ==================
-    npm test
-    ==================
+  ## Tests
 
-    ## Contribution
-    
-    test
+  To run tests, run the following command:
+  
+  
+  npm test
+  
 
-    ## Questions
+  ## Contribution
+  
+  
 
-    If you have any questions about the repo, open an issue or contact Steffield directly.
+  ## Questions
+
+  If you have any questions about the repo, open an issue or contact Steffield directly.
+
+  undefined

@@ -5,8 +5,11 @@ const axios= require("axios");
 
 
 // const writeFileAsync = util.promisify(fs.writeFile);
-
-
+// fs.readFile("banner.json", "utf8", function(err, data) {
+//   if (err) {
+//     throw err;
+//   }
+init();
 function init() {
 
  inquirer.prompt([
@@ -89,23 +92,24 @@ function init() {
 
   //====get the licence badge function==========================
 
-  async function getLicenseBadge() {
+  // async 
+  function getLicenseBadge() {
     console.log(data.license);
     try {
       if(data.license === "MIT"){
-        return "[![Github license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
+        return "![Github license](https://img.shields.io/badge/License-MIT-yellow.svg)";//(https://opensource.org/licenses/MIT)
   
       };
       if (data.license === "APACHE 2.0"){
-        return "[![Github license](https://img.shields.io/badge/License-Apache-2.svg)](https://opensource.org/licenses/Apache-2.0)";
+        return "![Github license](https://img.shields.io/badge/License-Apache-2.svg)";//(https://opensource.org/licenses/Apache-2.0)
   
       };
       if (data.license === "BSD 3"){
-        return "[![Github license](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)";
+        return "![Github license](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)";//(https://opensource.org/licenses/BSD-3-Clause)
   
       };
       if (data.license==="none"){
-        return "[![[Github license](https://img.shields.io/badge/License-none.svg)";
+        return "![[Github license](https://img.shields.io/badge/License-none.svg)";
       };
     }catch(error){
       console.log(error)
@@ -116,8 +120,12 @@ function init() {
   //===call the badge function==========
   // getLicenseBadge(data.license);
   const licenseBanner= getLicenseBadge(data.license);
+  // const licenseBanner= JSON.parse(getLicenseBadge(data.license));
+
+  console.log(licenseBanner);
 
   //======get the github profile image==========
+let avatar;
 
   async function getAvatar(){
     try{
@@ -125,6 +133,7 @@ function init() {
       const response= await axios.get(queryURL);
       const avatarURL= await response.data.avatar_url; //double check 
       console.log(avatarURL);
+      avatar= getAvatar(avatarURL);
     }catch(error) {
       console.log(error);
     }
@@ -132,72 +141,73 @@ function init() {
 
   //=====call avatar function
 
-  getAvatar(queryURL);
+//  avatar=getAvatar(avatarURL);
+  console.log(avatar);
 
 //====create the file layout function=========
 
-  function createREADME (data, licenseBanner){
+  function createREADME (data, licenseBanner, avatar){
   let layout=
     // the readme layout
-    `# ${data.title}
+  `# ${data.title}
   
-    ${licenseBanner}
+  ${licenseBanner}
+
+  ## Description
+
+  ${data.description}
+
+  ## Table of Content
+
+  *[Installation](#installation)
+
+  *[Usage](#usage)
+
+  *[Credits](#credits)
+
+  *[License](#license)
+
+  *[Tests](#tests)
+
+  *[Contributing](#contributing)
+
+  ## Installation
+
+  To install the necessary dependencies, run the following command:
   
-    ## Description
-
-    ${data.description}
   
-    ## Table of Content
+  ${data.dependencies}
+
+
+  ## Usage
   
-    *[Installation](#installation)
+  ${data.usage}
 
-    *[Usage](#usage)
-
-    *[Credits](#credits)
-
-    *[License](#license)
-
-    *[Tests](#tests)
-
-    *[Contributing](#contributing)
+  ## Collaborators or Third-Party Assets
   
-    ## Installation
+  ${data.collaboration}
 
-    To install the necessary dependencies, run the following command:
-   
-    ==================
-    ${data.dependencies}
-    ==================
-
-    ## Usage
-    
-    ${data.usage}
+  ## License
   
-    ## Collaborators or Third-Party Assets
-    
-    ${data.collaboration}
+  ${data.license}
+
+  ## Tests
+
+  To run tests, run the following command:
   
-    ## License
-    
-    ${data.license}
   
-    ## Tests
-
-    To run tests, run the following command:
-    
-    ==================
-    ${data.test}
-    ==================
-
-    ## Contribution
-    
-    ${data.contribution}
-
-    ## Questions
-
-    If you have any questions about the repo, open an issue or contact ${data.username} directly.`
+  ${data.test}
   
-   // ${avatarURL}
+
+  ## Contribution
+  
+  ${data.contribution}
+
+  ## Questions
+
+  If you have any questions about the repo, open an issue or contact ${data.username} directly.
+
+  ${avatar}`
   
     console.log(data.title);
 
@@ -212,7 +222,7 @@ function init() {
   
   //======call the create function
 
-createREADME(data, licenseBanner);
+createREADME(data, licenseBanner, avatar);
 
 
 
@@ -221,5 +231,5 @@ createREADME(data, licenseBanner);
 
 
 
-init();
+
 
