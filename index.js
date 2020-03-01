@@ -1,11 +1,10 @@
 const inquirer = require("inquirer");
-const fs = require("fs");
-// const util = require("util");
+const fs = require('fs-extra');
 const axios = require("axios");
 
-// const writeFileAsync = util.promisify(fs.writeFile);
-//
+
 init();
+
 function init() {
   inquirer
     .prompt([
@@ -57,7 +56,39 @@ function init() {
         name: "contribution",
         message:
           "What does the user need to know about contributing to the project?"
-      }
+      },
+      {
+        type: "confirm",
+        name: "IMG",
+        message:
+          "Do you want to add a screenshot of your application?",
+        // choices: ["yes", "no"]
+      },
+      {
+        type: "input",
+        name: "appImg",
+        message:
+          "If you want to add a screenshot of your application enter the path/source!",
+      },
+      {
+        type: "confirm",
+        name: "link",
+        message:
+          "Do you want to add a link to your application?",
+        // choices: ["yes", "no"]
+      },
+      {
+        type: "input",
+        name: "appLink",
+        message:
+          "If you want to add a link to your deployed application, enter the href?",
+         
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "Enter your email address!",
+      },
     ])
     .then(response => {
       const data = {
@@ -68,7 +99,13 @@ function init() {
         dependencies: response.dependencies,
         test: response.test,
         usage: response.usage,
-        contribution: response.contribution
+        collaboration: response.collaboration,
+        contribution: response.contribution,
+        IMG: response.IMG,
+        appImg: response.appImg,
+        link: response.link,
+        appLink: response.appLink,
+        email: response.email
       };
 
       return data;
@@ -76,19 +113,18 @@ function init() {
     .then(data => {
       //======call the badge function==========
       data.licenseBanner = getLicenseBadge(data.license);
+
+      //===get app IMG
+      data.screenshot = appScreenshot(data.IMG, data.appImg);
       
+      //===get app link
+      data.deployedLink =appLink(data.link, data.appLink);
+
       //=====call avatar function
-      data.avatar = getAvatar(data.username)
-
-
-      //======call the create function
-      createREADME(data);
-
-
-      return data;
-    })
-    .then(data => {
-      console.log(data);
+      getAvatar(data.username).then(avatar => {
+        data.avatar = avatar;
+        createREADME(data);
+      });
     });
 }
 
@@ -105,7 +141,7 @@ function getLicenseBadge(license) {
       return "![Github license](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)"; //(https://opensource.org/licenses/BSD-3-Clause)
     }
     if (license === "none") {
-      return "![[Github license](https://img.shields.io/badge/License-none.svg)";
+      return "";
     }
   } catch (error) {
     console.log(error);
@@ -117,11 +153,41 @@ async function getAvatar(username) {
   const queryURL = "https://api.github.com/users/" + username;
   try {
     const response = await axios.get(queryURL);
+    console.log(response.data.avatar_url);
     return response.data.avatar_url;
   } catch (error) {
     console.log(error);
   }
 }
+
+//====screenshot of app==========================
+function appScreenshot(IMG, appImg) {
+  try {
+    if (IMG === true) {
+      return '<img src="' + appImg + '" alt="application image" width= "600px" height="250px"><br>';
+    } else{
+      return ""
+    }
+  
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+//====link for deployed app==========================
+function appLink(link, appLink) {
+  try {
+    if (link === true) {
+      return '<a href="http://' + appLink +' ">Link to deployed Application </a>';
+    } else{
+      return ""
+    }
+  
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 
 //====create the file layout function=========
 
@@ -155,9 +221,7 @@ ${data.description}
 
 To install the necessary dependencies, run the following command:
 
-
 ${data.dependencies}
-
 
 ## Usage
 
@@ -175,19 +239,30 @@ ${data.license}
 
 To run tests, run the following command:
 
-
 ${data.test}
-
 
 ## Contribution
 
 ${data.contribution}
 
+---------------------------------------
+
+${data.screenshot}
+
+${data.deployedLink}
+
+---------------------------------------
+
+
 ## Questions
 
-If you have any questions about the repo, open an issue or contact ${data.username} directly.
+If you have any questions about the repo, open an issue or contact ${data.username} directly ${data.email}.
 
-${data.avatar}`;
+<img src="${data.avatar}" width ="150px" height="150px">
+
+`;
+
+
 
   console.log(data.title);
 

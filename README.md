@@ -1,10 +1,10 @@
-# TEST
+# README Generator
 
 ![Github license](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ## Description
 
-sdfg
+Create your README file in the command-line. This application will help the user to dynamically generate a README.md file from the user's input. 
 
 ## Table of Content
 
@@ -24,36 +24,33 @@ sdfg
 
 To install the necessary dependencies, run the following command:
 
-
 npm i
-
 
 ## Usage
 
-sdf
+Install all dependencies and enter` node index.js` in your command line and answer all the questions. A README.md file will be created and saved in the same folder of dependencies and index.js file.
 
 ## Collaborators or Third-Party Assets
 
-undefined
+Homework 09 Trilogy Education Services
 
 ## License
 
-MIT
+None
 
-## Tests
+---------------------------------------
 
-To run tests, run the following command:
-
-
-npm test
+![](READMEgif1.gif)
 
 
-## Contribution
+![](READMEgif2.gif)
 
-sdf
+---------------------------------------
+
 
 ## Questions
 
-If you have any questions about the repo, open an issue or contact Steffield directly.
+If you have any questions about the repo, open an issue or contact Steffield directly steffilebby@gmail.com.
 
-[object Promise]
+<img src="https://avatars0.githubusercontent.com/u/56233744?v=4" width ="150px" height="150px">
+
