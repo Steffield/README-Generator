@@ -215,7 +215,7 @@ ${data.description}
 
 *[Tests](#tests)
 
-*[Contributing](#contributing)
+*[Contribution](#contribution)
 
 ## Installation
 

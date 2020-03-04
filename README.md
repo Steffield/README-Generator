@@ -18,7 +18,7 @@ Create your README file in the command-line. This application will help the user
 
 *[Tests](#tests)
 
-*[Contributing](#contributing)
+*[Contribution](#contribution)
 
 ## Installation
 
@@ -37,6 +37,14 @@ Homework 09 Trilogy Education Services
 ## License
 
 MIT
+
+## Tests
+
+`npm test`
+
+## Contribution
+
+Not allowed.
 
 ---------------------------------------
 
