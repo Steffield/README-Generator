@@ -24,11 +24,11 @@ Create your README file in the command-line. This application will help the user
 
 To install the necessary dependencies, run the following command:
 
-npm i
+`npm i`
 
 ## Usage
 
-Install all dependencies and enter` node index.js` in your command line and answer all the questions. A README.md file will be created and saved in the same folder of dependencies and index.js file.
+Install all dependencies and enter` node index.js` in your command line and answer all the questions. A README.md file will be created and saved in the same folder as the index.js file.
 
 ## Collaborators or Third-Party Assets
 
@@ -36,7 +36,7 @@ Homework 09 Trilogy Education Services
 
 ## License
 
-None
+MIT
 
 ---------------------------------------
 
